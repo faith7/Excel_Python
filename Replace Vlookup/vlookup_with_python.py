@@ -22,9 +22,13 @@ df_initial.rename(columns={'code': 'ids'}, inplace=True)
 df_mg = pd.merge(df_initial, df_another[['ids', 'id']], on='ids', how='left')
 print(df_mg)
 
-# rename back to the inital column name
+# Rename back to the inital column name
 df_mg.rename(columns={'ids': 'code'}, inplace=True)
 
-# replace nan value with empty cells 
+# Replace nan value with empty cells
 df_mg = df_mg.replace(np.nan, '', regex=True)
 print(df_mg)
+
+# Export data to output_workbook excel file
+df_mg.to_excel(output_workbook, index=False)
+
